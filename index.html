@@ -206,6 +206,7 @@
       padding-bottom: 5px;
       font-family: 'Share Tech Mono', monospace;
       color: var(--accent);
+      min-height: 5rem; /* prevent layout shift */
     }
 
     /* ----- about, sections with mode variables ----- */
@@ -513,9 +514,9 @@
       #element { font-size: 2rem; }
     }
 
-    /* image fallback */
+    /* fallback for missing images: simple colored background */
     img {
-      background: #3a4a6b;
+      background: #2a3450;
     }
   </style>
 </head>
@@ -542,13 +543,13 @@
     </div>
   </div>
 
-  <!-- about section -->
+  <!-- about section with original image paths -->
   <div id="about">
     <div class="container">
       <div class="row">
         <div class="about-col-1">
-          <!-- fixed image path: use a reliable placeholder + original name -->
-          <img src="https://via.placeholder.com/500x600/1e2a5a/fa5919?text=TUSHAR+PP" alt="Tushar profile">
+          <!-- Using your original local image path -->
+          <img src="tusharrr-pp.jpg" alt="Tushar profile">
         </div>
         <div class="about-col-2">
           <h1 class="sub-title">About Me</h1>
@@ -595,14 +596,14 @@
     </div>
   </div>
 
-  <!-- projects -->
+  <!-- projects with original image names -->
   <div id="portfolio">
     <div class="container">
       <h1 class="sub-title">My Projects</h1>
       <div class="work-list">
-        <div class="work"><img src="https://via.placeholder.com/600x400/2a3450/fa5919?text=Currency+App" alt="Currency converter"><div class="layer"><h2>Currency Converter</h2><p>React app with real‑time exchange rates via API. Fast, accurate.</p><a href="https://iamtushar900.github.io/currency-converter/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
-        <div class="work"><img src="https://via.placeholder.com/600x400/2a3450/fa5919?text=Weather+App" alt="Weather app"><div class="layer"><h2>Weather Analyzer</h2><p>Live temperature, humidity & wind using OpenWeatherMap.</p><a href="https://iamtushar900.github.io/weather-system/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
-        <div class="work"><img src="https://via.placeholder.com/600x400/2a3450/fa5919?text=Food+Order" alt="Food order"><div class="layer"><h2>Online Food Order</h2><p>Browse menu, cart, and checkout — built with React.</p><a href="https://iamtushar900.github.io/Food_Delivery_App/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
+        <div class="work"><img src="CurrencyConverter.png" alt="Currency converter"><div class="layer"><h2>Currency Converter</h2><p>React app with real‑time exchange rates via API. Fast, accurate.</p><a href="https://iamtushar900.github.io/currency-converter/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
+        <div class="work"><img src="weather-chk.jpg" alt="Weather app"><div class="layer"><h2>Weather Analyzer</h2><p>Live temperature, humidity & wind using OpenWeatherMap.</p><a href="https://iamtushar900.github.io/weather-system/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
+        <div class="work"><img src="task-3.png" alt="Food order"><div class="layer"><h2>Online Food Order</h2><p>Browse menu, cart, and checkout — built with React.</p><a href="https://iamtushar900.github.io/Food_Delivery_App/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
       </div>
     </div>
   </div>
@@ -692,14 +693,24 @@
       }
     });
 
-    // typed.js animation (fixed first section)
-    var typed = new Typed('#element', {
-      strings: ['Front End Developer','UI/UX Designer','React Js Developer','Node Js Developer','PHP Developer','FullStack Web Developer'],
-      typeSpeed: 70,
-      backSpeed: 30,
-      loop: true
-    });
+    // Typed.js animation for first section — now properly initialized
+    // Ensure the script is loaded before using it
+    function initTyped() {
+      if (typeof Typed !== 'undefined') {
+        var typed = new Typed('#element', {
+          strings: ['Front End Developer','UI/UX Designer','React Js Developer','Node Js Developer','PHP Developer','FullStack Web Developer'],
+          typeSpeed: 70,
+          backSpeed: 30,
+          loop: true
+        });
+      } else {
+        // retry after a short delay if Typed is not yet loaded
+        setTimeout(initTyped, 200);
+      }
+    }
+    initTyped();
   </script>
+  <!-- Typed.js library loaded here -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </body>
 </html>
